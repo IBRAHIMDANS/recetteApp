@@ -1,24 +1,28 @@
-import React, { Component } from 'react'
-// CSS
-import './App.css'
+import React, { Component } from "react";
+import "./App.css";
+import Header from "./components/Header";
+import recettes from './recettes';
+import Admin from './components/admin';
 
 class App extends Component {
   state = {
-    pseudo: this.props.match.params.pseudo
-  }
-
-  render () {
-    return (
-      <div className='box'>
-        <h1>Bonjour {this.state.pseudo}</h1>
-        <div className='cards'>
-          <div className='card'>
+    pseudo: this.props.match.params.pseudo,
+    recettes : {}
+  };
+chargerExemple = () => this.setState({recettes})
+  render() {
+    return ( 
+      <div className="box">
+        <Header pseudo = {this.state.pseudo}/>
+        <div className="cards">
+          <div className="card">
             <h2>Une Carte</h2>
           </div>
         </div>
+      <Admin chargerExemple ={this.chargerExemple}></Admin>
       </div>
-    )
+    );
   }
 }
 
-export default App
+export default App;
