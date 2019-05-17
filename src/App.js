@@ -1,8 +1,10 @@
 import React, { Component } from "react";
 import "./App.css";
+
 import Header from "./components/Header";
 import recettes from './recettes';
 import Admin from './components/admin';
+import Card from './components/Card'
 
 class App extends Component {
   state = {
@@ -11,6 +13,9 @@ class App extends Component {
   };
 chargerExemple = () => this.setState({recettes})
   render() {
+    const cards = Object.keys(this.state.recettes).map(item =>
+      <Card details= {this.state.recettes[item]} />
+    )
     return ( 
       <div className="box">
         <Header pseudo = {this.state.pseudo}/>
