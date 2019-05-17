@@ -14,15 +14,13 @@ class App extends Component {
 chargerExemple = () => this.setState({recettes})
   render() {
     const cards = Object.keys(this.state.recettes).map(item =>
-      <Card details= {this.state.recettes[item]} />
+      <Card details= {this.state.recettes[item]} key= {item} />
     )
     return ( 
       <div className="box">
         <Header pseudo = {this.state.pseudo}/>
         <div className="cards">
-          <div className="card">
-            <h2>Une Carte</h2>
-          </div>
+            {cards}
         </div>
       <Admin chargerExemple ={this.chargerExemple}></Admin>
       </div>
