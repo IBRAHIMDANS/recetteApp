@@ -1,6 +1,5 @@
-import React, { useState } from "react";
-import { Button } from "antd";
-import { Link } from "react-router-dom";
+import React
+ from "react";
 
 const NotFound = () => {
   return <h2 className="notFound"> Sorry NotFound </h2>;

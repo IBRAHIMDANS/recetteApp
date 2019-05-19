@@ -1,24 +1,53 @@
-import React, { Component } from 'react'
-// CSS
-import './App.css'
+import React, { Component } from "react";
+import "./App.css";
 
+import Header from "./components/Header";
+import recettes from "./recettes";
+import Admin from "./components/admin";
+import Card from "./components/Card";
+import base from "./base";
 class App extends Component {
   state = {
-    pseudo: this.props.match.params.pseudo
+    pseudo: this.props.match.params.pseudo,
+    recettes: {}
+  };
+  componentDidMount() {
+    this.ref = base.syncState(`/${this.state.pseudo}/recettes`, {
+      context: this,
+      state: "recettes"
+    });
   }
-
-  render () {
+  componentWillUnmount() {
+    base.removeBinding(this.ref);
+  }
+  ajouterRecette = recette => {
+    const recettes = { ...this.state.recettes };
+    recettes[`recete-${Date.now()}`] = recette;
+    this.setState({ recettes });
+  };
+  modifierRecette = (key, newrecette) => {
+    const recettes = { ...this.state.recettes };
+    recettes[key] = newrecette;
+    this.setState({ recettes });
+  };
+  chargerExemple = () => this.setState({ recettes });
+  render() {
+    const cards = Object.keys(this.state.recettes).map(item => (
+      <Card details={this.state.recettes[item]} key={item} />
+    ));
     return (
-      <div className='box'>
-        <h1>Bonjour {this.state.pseudo}</h1>
-        <div className='cards'>
-          <div className='card'>
-            <h2>Une Carte</h2>
-          </div>
-        </div>
+      <div className="box">
+        <Header pseudo={this.state.pseudo} />
+        <div className="cards">{cards}</div>
+        <Admin
+          recettes={this.state.recettes}
+          chargerExemple={this.chargerExemple}
+          ajouterRecette={this.state.ajouterRecette}
+          modifierRecette={this.modifierRecette}
+        />
       </div>
-    )
+    );
   }
 }
 
-export default App
+export default App;
