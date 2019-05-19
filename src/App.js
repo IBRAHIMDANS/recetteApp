@@ -25,6 +25,11 @@ class App extends Component {
     recettes[`recete-${Date.now()}`] = recette;
     this.setState({ recettes });
   };
+  modifierRecette = (key, newrecette) => {
+    const recettes = { ...this.state.recettes };
+    recettes[key] = newrecette;
+    this.setState({ recettes });
+  };
   chargerExemple = () => this.setState({ recettes });
   render() {
     const cards = Object.keys(this.state.recettes).map(item => (
@@ -34,7 +39,12 @@ class App extends Component {
       <div className="box">
         <Header pseudo={this.state.pseudo} />
         <div className="cards">{cards}</div>
-        <Admin chargerExemple={this.chargerExemple} ajouterRecette = {this.state.ajouterRecette} />
+        <Admin
+          recettes={this.state.recettes}
+          chargerExemple={this.chargerExemple}
+          ajouterRecette={this.state.ajouterRecette}
+          modifierRecette={this.modifierRecette}
+        />
       </div>
     );
   }
