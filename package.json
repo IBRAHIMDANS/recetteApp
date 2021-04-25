@@ -6,7 +6,7 @@
     "@babel/preset-env": "^7.4.4",
     "@babel/preset-react": "^7.0.0",
     "antd": "^3.18.1",
-    "firebase": "^5.5.1",
+    "firebase": "8.4.2",
     "prop-types": "^15.6.2",
     "re-base": "^4.0.0",
     "react": "^16.6.0",
